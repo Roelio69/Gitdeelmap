@@ -1,0 +1,33 @@
+(http://sourceforge.net/projects/bowtie-bio/files/bowtie2/2.2.2/
+linux versie pakken voor direct gebruik)
+
+Linux gebruik: 
+gooi Bowtie2 met bestanden (en eventueel samtools) in de tmp map om daar zonder gebrek aan geheugen of privileges te kunnen werken. 
+
+(/tmpbo)
+[1] ./bowtie2-build WCFS1.fasta WCFS1output
+[1a] bowtie2-build WCFS1.fasta WCFS1output
+
+[2] ./bowtie2 -s -phred33 --very-fast --no-unal -x WCFS1output -U /media/ROELIO/NG-5181_MRS1_sequence.fastq  -S Bowtie2MRS1output.sam
+[2a] bowtie2-align-s-debug --very-fast --no-unal -x WCFS1output -U NG-5181_MRS1_sequence.fastq  -S Bowtie2MRS1output.sam
+
+Wat er is gebeurt: 
+Eerst werd de genoomsequentie van L.Plantarum subspecies WCFS1 gedownload en geindexed via Bowtie [1]. Daarna werd de index gebruikt voor fastq van MRS1 en CDM4 [2]. Hieruit komen dan 2 .sam bestanden die voor SAMtools kan worden gebruikt. Deze .sam files zijn enorm groot en zijn ook niet te openen met standaard programma's zoals kladblok. Door ze te compressen via .zip kun je ze eventueel op een memory-stick zetten. 
+
+(http://bow.codeplex.com/releases/view/87911
+direct klaar voor gebruik, UNIX/Windows)
+
+SAM 2 BAM:                    (output)  (input)
+[win] samtools view -b -s -o [map.bam] [map.sam]
+
+Sort BAM:            (input)   (output (zonder .bam erachter)
+[win] samtools sort [map.bam][sorted_map(.bam)]
+
+Index sorted BAM:     (input)
+[win] samtools index [sorted_map.bam]
+
+(http://bamview.sourceforge.net/
+pak de Windows and UNIX link voor direct gebruik via command line)
+
+Ten slotte visualiseren in bijvoorbeeld Artemis (BamView). 
+Bij Artemis moet je de sorted_map.bam index hebben EN DE MAP.BAM (deze moet je in Artemis invoeren. 
